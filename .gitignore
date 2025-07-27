@@ -1,0 +1,230 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+mongo-exporter
+mongo-exporter.exe
+mongo-exporter-*
+*-exporter
+*-exporter.exe
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+
+# Go module files
+go.sum
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+exporter.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Temporary folders
+tmp/
+temp/
+
+# Build artifacts
+build/
+dist/
+bin/
+
+# Configuration files with sensitive data
+config_*.yaml
+config_*.yml
+config-production.yaml
+config-govsmart-*.yaml
+config-test.yaml
+config.yaml
+*.key
+*.pem
+*.crt
+*.cert
+
+# Docker
+.dockerignore
+Dockerfile.dev
+
+# Kubernetes
+*.kubeconfig
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Ansible
+*.retry
+
+# Vagrant
+.vagrant/
+
+# Packer
+packer_cache/
+
+# Local development
+.local/
+local/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Archive files
+*.tar
+*.tar.gz
+*.zip
+*.rar
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Certificate files
+*.p12
+*.pfx
+
+# SSH keys
+id_rsa
+id_rsa.pub
+*.ppk
+
+# GPG keys
+*.gpg
+*.asc
+
+# Local configuration overrides
+config.local.yaml
+config.local.yml
+settings.local.json
+
+# Test data
+testdata/
+test_data/
+fixtures/
+
+# Documentation build
+docs/_build/
+site/
+
+# Profiling data
+*.prof
+*.pprof
+
+# Benchmark results
+benchmark_results.txt
+
+# Coverage reports
+coverage.html
+coverage.xml
+
+# Lint reports
+lint-report.txt
+
+# Security scan results
+security-scan-results.json
+
+# Test scripts and simulators
+*_simulator.sh
+*_simulator.js
+*_test.sh
+start-*.sh
+import-*.sh
+
+# Old dashboard files
+dashboard_*.json 

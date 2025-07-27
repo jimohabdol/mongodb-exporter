@@ -1,0 +1,155 @@
+# MongoDB Exporter Configuration Example
+# This file shows all available configuration options for comprehensive MongoDB monitoring
+
+# MongoDB connection configuration
+mongodb:
+  # MongoDB connection URI - supports both standalone and replica set connections
+  uri: "mongodb://localhost:27017"
+  
+  # Alternative connection parameters (if not using URI)
+  # username: "mongodb_exporter"
+  # password: "s3cr3tpassw0rd"
+  # database: "admin"
+  # auth_source: "admin"
+  # auth_mechanism: "SCRAM-SHA-256"
+  
+  # TLS/SSL configuration
+  tls_enabled: false
+  tls_insecure_skip_verify: false
+  # tls_cert_file: "/path/to/cert.pem"
+  # tls_key_file: "/path/to/key.pem"
+  # tls_ca_file: "/path/to/ca.pem"
+  
+  # Connection pool settings
+  connection_timeout: "10s"
+  server_selection_timeout: "30s"
+  max_pool_size: 100
+  min_pool_size: 5
+  max_idle_time: "30m"
+
+# Server configuration
+server:
+  port: "8080"
+  read_timeout: "30s"
+  write_timeout: "30s"
+  idle_timeout: "60s"
+
+# Metrics collection configuration
+metrics:
+  # How often to collect metrics
+  collection_interval: "15s"
+  
+  # Enable specific collectors (if empty, all are enabled by default)
+  enabled_metrics:
+    - "server_status"        # Basic server status metrics
+    - "replica_set_status"   # Replica set health and status
+    - "sharding"            # Sharding metrics for sharded clusters
+    - "wiredtiger"          # WiredTiger storage engine metrics
+    - "locks"               # Lock metrics and contention
+    - "index_stats"         # Index usage and statistics
+    - "storage_stats"       # Database and collection storage metrics
+    - "query_executor"      # Query execution statistics
+    - "operation_metrics"   # Operation counters and metrics
+    - "collstats"           # Detailed collection statistics
+    - "cursors"             # Cursor metrics and timeouts
+    - "profile"             # Profile collection (slow queries)
+    - "connection_pool"     # Connection pool metrics
+    - "compatibility"       # Compatibility metrics for Grafana dashboards
+  
+  # Disable specific collectors (takes precedence over enabled_metrics)
+  disabled_metrics:
+    # - "profile"  # Disable profile collection if not needed
+    # - "collstats"  # Disable if you don't need detailed collection stats
+  
+  # Custom labels to add to all metrics
+  custom_labels:
+    environment: "production"
+    cluster: "main"
+    region: "us-east-1"
+
+# Logging configuration
+logging:
+  level: "info"           # debug, info, warn, error
+  format: "json"          # json, console
+  output_path: "stdout"   # stdout or file path
+
+# Advanced collector-specific configurations
+collectors:
+  # Profile collector settings
+  profile:
+    # Only collect profiles for operations slower than this threshold
+    slow_operation_threshold: "100ms"
+    # Maximum number of profile entries to process per collection cycle
+    max_entries_per_cycle: 1000
+  
+  # Collection stats collector settings
+  collstats:
+    # Specific collections to monitor (format: database.collection)
+    # If empty, all non-system collections are monitored
+    monitored_collections:
+      # - "myapp.users"
+      # - "myapp.orders"
+      # - "*"  # Monitor all collections
+  
+  # Sharding collector settings
+  sharding:
+    # Whether to collect chunk distribution metrics (can be expensive)
+    collect_chunk_distribution: true
+    # Whether to collect migration history
+    collect_migration_history: true
+  
+  # Index stats collector settings
+  index_stats:
+    # Whether to collect index usage statistics
+    collect_usage_stats: true
+    # Skip collections with more than this many indexes (performance optimization)
+    max_indexes_per_collection: 50
+  
+  # Connection pool collector settings
+  connection_pool:
+    # Whether to collect per-host connection metrics
+    collect_per_host_metrics: true
+    # Whether to analyze current operations for connection usage
+    analyze_current_operations: true
+
+# Example configurations for different deployment scenarios:
+
+# Standalone MongoDB instance
+# metrics:
+#   enabled_metrics:
+#     - "server_status"
+#     - "wiredtiger"
+#     - "locks"
+#     - "storage_stats"
+#     - "connection_pool"
+
+# Replica Set
+# metrics:
+#   enabled_metrics:
+#     - "server_status"
+#     - "replica_set_status"
+#     - "wiredtiger"
+#     - "locks"
+#     - "storage_stats"
+#     - "cursors"
+#     - "connection_pool"
+
+# Sharded Cluster (mongos)
+# metrics:
+#   enabled_metrics:
+#     - "server_status"
+#     - "sharding"
+#     - "connection_pool"
+#     - "cursors"
+
+# Sharded Cluster (shard member)
+# metrics:
+#   enabled_metrics:
+#     - "server_status"
+#     - "replica_set_status"
+#     - "wiredtiger"
+#     - "locks"
+#     - "storage_stats"
+#     - "index_stats"
+#     - "collstats"
+#     - "profile" 
