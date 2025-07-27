@@ -416,20 +416,16 @@ collectors:
 ### Command Line Validation
 
 ```bash
-# Validate configuration file
 ./mongo-exporter -config config.yaml --validate
 
-# Test configuration without starting
 ./mongo-exporter -config config.yaml --dry-run
 ```
 
 ### Configuration Testing
 
 ```bash
-# Test MongoDB connection
 ./mongo-exporter -config config.yaml --test-connection
 
-# Test metrics collection
 ./mongo-exporter -config config.yaml --test-metrics
 ```
 
@@ -486,14 +482,11 @@ collectors:
 ### Configuration Debugging
 
 ```bash
-# Enable debug logging
 export LOG_LEVEL=debug
 ./mongo-exporter -config config.yaml
 
-# Check configuration parsing
 ./mongo-exporter -config config.yaml --dump-config
 
-# Validate specific sections
 ./mongo-exporter -config config.yaml --validate-mongodb
 ./mongo-exporter -config config.yaml --validate-metrics
 ``` 

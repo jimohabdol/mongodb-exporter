@@ -121,7 +121,6 @@ mongo-exporter/
 ### Building
 
 ```bash
-# Build for current platform
 go build -o mongo-exporter main.go
 
 GOOS=linux GOARCH=amd64 go build -o mongo-exporter main.go
@@ -136,7 +135,6 @@ go build -ldflags "-X main.version=1.0.0 -X main.buildTime=$(date -u '+%Y-%m-%d_
 go test ./...
 
 go test -cover ./...
-
 
 go test ./collector -v
 ```
