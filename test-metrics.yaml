@@ -1,0 +1,52 @@
+mongodb:
+  uri: "mongodb://localhost:27017/test"
+  timeout: "10s"
+  max_pool_size: 10
+  min_pool_size: 2
+
+server:
+  port: 9216
+  host: "0.0.0.0"
+
+metrics:
+  collection_interval: "15s"
+  enabled_metrics:
+    - "server_status"
+    - "replica_set_status"
+    - "wiredtiger"
+    - "locks"
+    - "index_stats"
+    - "storage_stats"
+    - "query_executor"
+    - "operation_metrics"
+    - "collstats"
+    - "cursors"
+    - "profile"
+    - "connection_pool"
+    - "compatibility"
+    - "sharding"
+  custom_labels:
+    instance: "test-mongodb"
+    environment: "testing"
+
+logging:
+  level: "debug"
+  format: "console"
+
+collectors:
+  collstats:
+    monitored_collections:
+      - "*"
+  profile:
+    slow_operation_threshold: "50ms"
+    max_entries_per_cycle: 100
+  sharding:
+    collect_chunk_distribution: true
+    collect_migration_history: true
+  index_stats:
+    collect_usage_stats: true
+    max_indexes_per_collection: 50
+  connection_pool:
+    collect_per_host_metrics: true
+    analyze_current_operations: true 
+

@@ -78,6 +78,12 @@ func NewCollStatsCollector(client *mongo.Client, logger *zap.Logger, config Coll
 			labels,
 			nil,
 		),
+		"collection_total_size_bytes": prometheus.NewDesc(
+			"mongodb_collstats_total_size_bytes",
+			"Total size of collection including documents and indexes in bytes",
+			labels,
+			nil,
+		),
 		"collection_index_size_bytes": prometheus.NewDesc(
 			"mongodb_collstats_index_size_bytes",
 			"Size of specific index in bytes",
@@ -306,6 +312,19 @@ func (c *CollStatsCollector) collectBasicCollectionMetrics(ch chan<- prometheus.
 			}
 		}
 	}
+
+	// Calculate and collect total collection size (documents + indexes)
+	if docSize := c.getNumericValue(stats["size"]); docSize != nil {
+		if indexSize := c.getNumericValue(stats["totalIndexSize"]); indexSize != nil {
+			totalSize := *docSize + *indexSize
+			ch <- prometheus.MustNewConstMetric(
+				c.descriptors["collection_total_size_bytes"],
+				prometheus.GaugeValue,
+				totalSize,
+				labels...,
+			)
+		}
+	}
 }
 
 func (c *CollStatsCollector) collectIndexMetrics(ch chan<- prometheus.Metric, stats bson.M, dbName, collName string, instance map[string]string) {
@@ -469,4 +488,3 @@ func (c *CollStatsCollector) Name() string {
 func (c *CollStatsCollector) SetMonitoredCollections(collections []string) {
 	c.monitoredCollections = collections
 }
- 

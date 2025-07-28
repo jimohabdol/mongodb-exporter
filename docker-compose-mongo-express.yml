@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb-test
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: 
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 
+      ME_CONFIG_BASICAUTH: false
+      ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+      VCAP_APP_HOST: 0.0.0.0
+      VCAP_APP_PORT: 8081
+    networks:
+      - mongo-network
+    depends_on:
+      - mongodb-test
+
+  mongodb-test:
+    image: mongo:latest
+    container_name: mongodb-test
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo-network
+
+networks:
+  mongo-network:
+    driver: bridge
